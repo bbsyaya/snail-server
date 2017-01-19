@@ -111,7 +111,7 @@ public class ProxyTask implements Runnable {
 	 * @param msg 
 	 */
 	private synchronized void logRequestMsg(String msg) {
-		System.out.println(msg);
+//		System.out.println(msg);
 	}
 
 	/** 
@@ -122,11 +122,13 @@ public class ProxyTask implements Runnable {
 	 */
 	private void readForwardData(InputStream receiverInputStream, OutputStream senderOutStream) {
 		byte[] buffer = new byte[4096];
+		StringBuilder ss = new StringBuilder();
 		try {
 			int len;
 			while ((len = receiverInputStream.read(buffer)) != -1) {
 				if (len > 0) {
 					senderOutStream.write(buffer, 0, len);
+					ss.append(new String(buffer, "utf-8"));
 					senderOutStream.flush();
 				}
 				totalUpload += len;
@@ -140,6 +142,8 @@ public class ProxyTask implements Runnable {
 			} catch (IOException e1) {
 			}
 		}
+		
+		System.out.println(ss);
 	}
 
 	/** 
@@ -159,12 +163,15 @@ public class ProxyTask implements Runnable {
 
 		@Override
 		public void run() {
+			StringBuilder builder = new StringBuilder();
 			byte[] buffer = new byte[4096];
+			
 			try {
 				int len;
 				while ((len = isOut.read(buffer)) != -1) {
 					if (len > 0) {
 						osIn.write(buffer, 0, len);
+						builder.append(new String(buffer, 0, len, "UTF-8" ));
 						osIn.flush();
 						totalDownload += len;
 					}
@@ -174,7 +181,9 @@ public class ProxyTask implements Runnable {
 				}
 			} catch (Exception e) {
 			}
+			System.out.println(builder);
 		}
+		
 	}
 
 }

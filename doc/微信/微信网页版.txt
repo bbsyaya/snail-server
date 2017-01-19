@@ -1,0 +1,212 @@
+http://szextshort.weixin.qq.com/cgi-bin/micromsg-bin/getchatroommemberdetail 
+
+http://szextshort.weixin.qq.com/cgi-bin/micromsg-bin/statusnotify
+
+http://szextshort.weixin.qq.com/cgi-bin/micromsg-bin/batchgetheadimg 
+
+
+/cgi-bin/mmwebwx-bin/webwxsync?sid=eHeZPll2cI8uYThL&skey=@crypt_ef9f8f62_cfb89df226e96c3d980ad5661fd5ea91
+{
+"BaseResponse": {
+"Ret": 0,
+"ErrMsg": ""
+}
+,
+"AddMsgCount": 1,
+"AddMsgList": [{
+"MsgId": "1454684370013952714",
+"FromUserName": "@818672065f7961709784d67505f8e1a165b5b6bf49856b566db326d625259027",
+"ToUserName": "@818672065f7961709784d67505f8e1a165b5b6bf49856b566db326d625259027",
+"MsgType": 3,
+"Content": "&lt;?xml version=\"1.0\"?&gt;<br/>&lt;msg&gt;<br/>\t&lt;img aeskey=\"1b7c1fa16373445d9c8d7a18cab9ec2e\" encryver=\"1\" cdnthumbaeskey=\"1b7c1fa16373445d9c8d7a18cab9ec2e\" cdnthumburl=\"30500201000449304702010002049024eae102033d14b90204dcfd03b702045872dcb80425617570696d675f313130383431373864363936316633375f313438333932323631363337350201000201000400\" cdnthumblength=\"7280\" cdnthumbheight=\"120\" cdnthumbwidth=\"68\" cdnmidheight=\"0\" cdnmidwidth=\"0\" cdnhdheight=\"0\" cdnhdwidth=\"0\" cdnmidimgurl=\"30500201000449304702010002049024eae102033d14b90204dcfd03b702045872dcb80425617570696d675f313130383431373864363936316633375f313438333932323631363337350201000201000400\" length=\"41838\" md5=\"042a13122adf9e3f71346ade42088e89\" /&gt;<br/>&lt;/msg&gt;<br/>",
+"Status": 3,
+"ImgStatus": 2,
+"CreateTime": 1483924743,
+"VoiceLength": 0,
+"PlayLength": 0,
+"FileName": "",
+"FileSize": "",
+"MediaId": "",
+"Url": "",
+"AppMsgType": 0,
+"StatusNotifyCode": 0,
+"StatusNotifyUserName": "",
+"RecommendInfo": {
+"UserName": "",
+"NickName": "",
+"QQNum": 0,
+"Province": "",
+"City": "",
+"Content": "",
+"Signature": "",
+"Alias": "",
+"Scene": 0,
+"VerifyFlag": 0,
+"AttrStatus": 0,
+"Sex": 0,
+"Ticket": "",
+"OpCode": 0
+}
+,
+"ForwardFlag": 0,
+"AppInfo": {
+"AppID": "",
+"Type": 0
+}
+,
+"HasProductId": 0,
+"Ticket": "",
+"ImgHeight": 120,
+"ImgWidth": 68,
+"SubMsgType": 0,
+"NewMsgId": 1454684370013952714,
+"OriContent": ""
+}
+],
+"ModContactCount": 0,
+"ModContactList": [],
+"DelContactCount": 0,
+"DelContactList": [],
+"ModChatRoomMemberCount": 0,
+"ModChatRoomMemberList": [],
+"Profile": {
+"BitFlag": 0,
+"UserName": {
+"Buff": ""
+}
+,
+"NickName": {
+"Buff": ""
+}
+,
+"BindUin": 0,
+"BindEmail": {
+"Buff": ""
+}
+,
+"BindMobile": {
+"Buff": ""
+}
+,
+"Status": 0,
+"Sex": 0,
+"PersonalCard": 0,
+"Alias": "",
+"HeadImgUpdateFlag": 0,
+"HeadImgUrl": "",
+"Signature": ""
+}
+,
+"ContinueFlag": 0,
+"SyncKey": {
+"Count": 11,
+"List": [{
+"Key": 1,
+"Val": 661861081
+}
+,{
+"Key": 2,
+"Val": 661861432
+}
+,{
+"Key": 3,
+"Val": 661861370
+}
+,{
+"Key": 11,
+"Val": 661861429
+}
+,{
+"Key": 13,
+"Val": 661860019
+}
+,{
+"Key": 201,
+"Val": 1483924743
+}
+,{
+"Key": 203,
+"Val": 1483924679
+}
+,{
+"Key": 1000,
+"Val": 1483922162
+}
+,{
+"Key": 1001,
+"Val": 1483922192
+}
+,{
+"Key": 1002,
+"Val": 1483668474
+}
+,{
+"Key": 1004,
+"Val": 1483883286
+}
+]
+}
+,
+"SKey": "",
+"SyncCheckKey": {
+"Count": 11,
+"List": [{
+"Key": 1,
+"Val": 661861081
+}
+,{
+"Key": 2,
+"Val": 661861432
+}
+,{
+"Key": 3,
+"Val": 661861370
+}
+,{
+"Key": 11,
+"Val": 661861429
+}
+,{
+"Key": 13,
+"Val": 661860019
+}
+,{
+"Key": 201,
+"Val": 1483924743
+}
+,{
+"Key": 203,
+"Val": 1483924679
+}
+,{
+"Key": 1000,
+"Val": 1483922162
+}
+,{
+"Key": 1001,
+"Val": 1483922192
+}
+,{
+"Key": 1002,
+"Val": 1483668474
+}
+,{
+"Key": 1004,
+"Val": 1483883286
+}
+]
+}
+
+}
+
+
+
+
+/cgi-bin/mmwebwx-bin/webwxgetmsgimg?&MsgID=1454684370013952714&skey=%40crypt_ef9f8f62_cfb89df226e96c3d980ad5661fd5ea91&type=slave
+获取图片信息
+
+
+
+
+含有nickname，username等信息
+/cgi-bin/mmwebwx-bin/webwxinit?r=2121909296

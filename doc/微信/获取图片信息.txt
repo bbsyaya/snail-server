@@ -1,0 +1,204 @@
+https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxsync?sid=SqwAfN6LyQh/eJJl&skey=@crypt_ef9f8f62_2ec1bf9d46d8b1df8b24d83e412dd0b7
+
+
+{
+"BaseResponse": {
+"Ret": 0,
+"ErrMsg": ""
+}
+,
+"AddMsgCount": 1,
+"AddMsgList": [{
+"MsgId": "8896282800766118133",
+"FromUserName": "@4e3d4c90d6c36d7a1cfab08529b21ed58368525f9dcd8d457cd60ebea360ba79",
+"ToUserName": "@4e3d4c90d6c36d7a1cfab08529b21ed58368525f9dcd8d457cd60ebea360ba79",
+"MsgType": 3,
+"Content": "&lt;?xml version=\"1.0\"?&gt;<br/>&lt;msg&gt;<br/>\t&lt;img aeskey=\"822a90f222da43ccba132c573cd3f7c4\" encryver=\"1\" cdnthumbaeskey=\"822a90f222da43ccba132c573cd3f7c4\" cdnthumburl=\"30500201000449304702010002049024eae102033d14b902042ce503b70204587321610425617570696d675f313130383431373864363936316633375f313438333934303139323739300201000201000400\" cdnthumblength=\"7920\" cdnthumbheight=\"120\" cdnthumbwidth=\"68\" cdnmidheight=\"0\" cdnmidwidth=\"0\" cdnhdheight=\"0\" cdnhdwidth=\"0\" cdnmidimgurl=\"30500201000449304702010002049024eae102033d14b902042ce503b70204587321610425617570696d675f313130383431373864363936316633375f313438333934303139323739300201000201000400\" length=\"50428\" md5=\"7924cb6867abb769761430c6187545fd\" /&gt;<br/>&lt;/msg&gt;<br/>",
+"Status": 3,
+"ImgStatus": 2,
+"CreateTime": 1483940193,
+"VoiceLength": 0,
+"PlayLength": 0,
+"FileName": "",
+"FileSize": "",
+"MediaId": "",
+"Url": "",
+"AppMsgType": 0,
+"StatusNotifyCode": 0,
+"StatusNotifyUserName": "",
+"RecommendInfo": {
+"UserName": "",
+"NickName": "",
+"QQNum": 0,
+"Province": "",
+"City": "",
+"Content": "",
+"Signature": "",
+"Alias": "",
+"Scene": 0,
+"VerifyFlag": 0,
+"AttrStatus": 0,
+"Sex": 0,
+"Ticket": "",
+"OpCode": 0
+}
+,
+"ForwardFlag": 0,
+"AppInfo": {
+"AppID": "",
+"Type": 0
+}
+,
+"HasProductId": 0,
+"Ticket": "",
+"ImgHeight": 120,
+"ImgWidth": 68,
+"SubMsgType": 0,
+"NewMsgId": 8896282800766118133,
+"OriContent": ""
+}
+],
+"ModContactCount": 0,
+"ModContactList": [],
+"DelContactCount": 0,
+"DelContactList": [],
+"ModChatRoomMemberCount": 0,
+"ModChatRoomMemberList": [],
+"Profile": {
+"BitFlag": 0,
+"UserName": {
+"Buff": ""
+}
+,
+"NickName": {
+"Buff": ""
+}
+,
+"BindUin": 0,
+"BindEmail": {
+"Buff": ""
+}
+,
+"BindMobile": {
+"Buff": ""
+}
+,
+"Status": 0,
+"Sex": 0,
+"PersonalCard": 0,
+"Alias": "",
+"HeadImgUpdateFlag": 0,
+"HeadImgUrl": "",
+"Signature": ""
+}
+,
+"ContinueFlag": 0,
+"SyncKey": {
+"Count": 11,
+"List": [{
+"Key": 1,
+"Val": 661861081
+}
+,{
+"Key": 2,
+"Val": 661861775
+}
+,{
+"Key": 3,
+"Val": 661861705
+}
+,{
+"Key": 11,
+"Val": 661861770
+}
+,{
+"Key": 13,
+"Val": 661860019
+}
+,{
+"Key": 201,
+"Val": 1483940193
+}
+,{
+"Key": 203,
+"Val": 1483940021
+}
+,{
+"Key": 1000,
+"Val": 1483922162
+}
+,{
+"Key": 1001,
+"Val": 1483922192
+}
+,{
+"Key": 1002,
+"Val": 1483668474
+}
+,{
+"Key": 1004,
+"Val": 1483883484
+}
+]
+}
+,
+"SKey": "",
+"SyncCheckKey": {
+"Count": 11,
+"List": [{
+"Key": 1,
+"Val": 661861081
+}
+,{
+"Key": 2,
+"Val": 661861775
+}
+,{
+"Key": 3,
+"Val": 661861705
+}
+,{
+"Key": 11,
+"Val": 661861770
+}
+,{
+"Key": 13,
+"Val": 661860019
+}
+,{
+"Key": 201,
+"Val": 1483940193
+}
+,{
+"Key": 203,
+"Val": 1483940021
+}
+,{
+"Key": 1000,
+"Val": 1483922162
+}
+,{
+"Key": 1001,
+"Val": 1483922192
+}
+,{
+"Key": 1002,
+"Val": 1483668474
+}
+,{
+"Key": 1004,
+"Val": 1483883484
+}
+]
+}
+
+}
+
+
+
+
+
+Referer: https://wx2.qq.com/
+
+https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxgetmsgimg?&MsgID=8896282800766118133&skey=%40crypt_ef9f8f62_2ec1bf9d46d8b1df8b24d83e412dd0b7&type=slave
+
