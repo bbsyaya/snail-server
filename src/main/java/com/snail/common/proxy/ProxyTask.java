@@ -1,5 +1,7 @@
 package com.snail.common.proxy;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -7,15 +9,20 @@ import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.snail.common.https.CertificateUtils;
+import com.snail.common.https.SocketUtils;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 public class ProxyTask implements Runnable {
-	private Socket receiverSocket;
+	private Socket proxySocket;
 	private Socket sendSocket;
 
 	private long totalUpload = 0l;//总计上行比特数  
 	private long totalDownload = 0l;//总计下行比特数  
 
 	public ProxyTask(Socket socket) {
-		this.receiverSocket = socket;
+		this.proxySocket = socket;
 	}
 
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -32,23 +39,29 @@ public class ProxyTask implements Runnable {
 		try {
 			builder.append("\r\n").append("Request Time  ：" + sdf.format(new Date()));
 
-			InputStream receiverInputStream = receiverSocket.getInputStream();
-			OutputStream receiverOutStream = receiverSocket.getOutputStream();
+			InputStream proxyInputStream = proxySocket.getInputStream();
+			OutputStream proxyOutStream = proxySocket.getOutputStream();
 
 			//从客户端流数据中读取头部，获得请求主机和端口  
-			HttpHeader header = HttpHeader.readHeader(receiverInputStream);
+			HttpHeader header = HttpHeader.readHeader(proxyInputStream);
 
 			//添加请求日志信息  
-			builder.append("From    Host  ：" + receiverSocket.getInetAddress());
-			builder.append(" Port  ：" + receiverSocket.getPort());
+			builder.append("From    Host  ：" + proxySocket.getInetAddress());
+			builder.append(" Port  ：" + proxySocket.getPort());
 			builder.append(" Method：" + header.getMethod());
 			builder.append(" Request Host  ：" + header.getHost());
 			builder.append(" Request Port  ：" + header.getPort()).append("\r\n");
 
+			System.out.println("header = " + String.valueOf(header));
+			System.out.println("host = " + String.valueOf(header.getHost()));
+			if (!header.getHost().contains("baidu")) {
+				return;
+			}
+			
 			//如果没解析出请求请求地址和端口，则返回错误信息  
 			if (header.getHost() == null || header.getPort() == null) {
-				receiverOutStream.write(SERVERERROR.getBytes());
-				receiverOutStream.flush();
+				proxyOutStream.write(SERVERERROR.getBytes());
+				proxyOutStream.flush();
 				return;
 			}
 
@@ -57,13 +70,14 @@ public class ProxyTask implements Runnable {
 			sendSocket.setKeepAlive(true);
 			InputStream senderInputStream = sendSocket.getInputStream();
 			OutputStream senderOutStream = sendSocket.getOutputStream();
-			//新开一个线程将返回的数据转发给客户端,串行会出问题，尚没搞明白原因  
-			Thread replyThread = new DataSendThread(senderInputStream, receiverOutStream);
+			
+			Thread replyThread = new DataSendThread(senderInputStream, proxyOutStream);
 			replyThread.start();
 			if (header.getMethod().equals(HttpHeader.METHOD_CONNECT)) {
 				// 将已联通信号返回给请求页面  
-				receiverOutStream.write(AUTHORED.getBytes());
-				receiverOutStream.flush();
+//				this.generateCertificate(proxyInputStream);
+				proxyOutStream.write(AUTHORED.getBytes());
+				proxyOutStream.flush();
 			} else {
 				//http请求需要将请求头部也转发出去  
 				byte[] headerData = header.toString().getBytes();
@@ -72,22 +86,22 @@ public class ProxyTask implements Runnable {
 				senderOutStream.flush();
 			}
 			//读取客户端请求过来的数据转发给服务器  
-			readForwardData(receiverInputStream, senderOutStream);
+			readForwardData(proxyInputStream, senderOutStream);
 			//等待向客户端转发的线程结束  
 			replyThread.join();
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (!receiverSocket.isOutputShutdown()) {
+			if (!proxySocket.isOutputShutdown()) {
 				//如果还可以返回错误状态的话，返回内部错误  
 				try {
-					receiverSocket.getOutputStream().write(SERVERERROR.getBytes());
+					proxySocket.getOutputStream().write(SERVERERROR.getBytes());
 				} catch (IOException e1) {
 				}
 			}
 		} finally {
 			try {
-				if (receiverSocket != null) {
-					receiverSocket.close();
+				if (proxySocket != null) {
+					proxySocket.close();
 				}
 			} catch (IOException e) {
 			}
@@ -105,6 +119,23 @@ public class ProxyTask implements Runnable {
 			logRequestMsg(builder.toString());
 		}
 	}
+
+//	private void generateCertificate(InputStream proxyInputStream) {
+//		DataInputStream dataInputStream = new DataInputStream(proxyInputStream);
+//		try {
+//			int length = 4096;
+//			//第一步 获取客户端发送的支持的加密规则，包括hash算法，这里选用SHA1作为hash
+//			byte[] clientSupportHash = SocketUtils.readBytes(dataInputStream, length);
+//			String clientHash = new String(clientSupportHash);
+//			String hash = clientHash;
+//			System.out.println("客户端发送了hash算法为:" + hash);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		
+//	}
 
 	/** 
 	 * 避免多线程竞争把日志打串行了 
@@ -132,7 +163,7 @@ public class ProxyTask implements Runnable {
 					senderOutStream.flush();
 				}
 				totalUpload += len;
-				if (receiverSocket.isClosed() || sendSocket.isClosed()) {
+				if (proxySocket.isClosed() || sendSocket.isClosed()) {
 					break;
 				}
 			}
@@ -175,13 +206,13 @@ public class ProxyTask implements Runnable {
 						osIn.flush();
 						totalDownload += len;
 					}
-					if (receiverSocket.isOutputShutdown() || sendSocket.isClosed()) {
+					if (proxySocket.isOutputShutdown() || sendSocket.isClosed()) {
 						break;
 					}
 				}
 			} catch (Exception e) {
 			}
-			System.out.println(builder);
+			System.out.println("BUILDER = " + builder);
 		}
 		
 	}

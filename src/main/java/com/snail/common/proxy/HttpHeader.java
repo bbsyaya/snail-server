@@ -62,8 +62,8 @@ public final class HttpHeader {
 			} while (true);
 		}
 		
-//		System.out.println("total begin = \r\n" + total.toString());
-//		System.out.println("total end = " );
+		System.out.println("total begin = \r\n" + total.toString());
+		System.out.println("total end = " );
 
 		return header;
 	}
