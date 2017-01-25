@@ -221,6 +221,7 @@ class Handlers
             oSession.responseCode = 304;
             oSession["ui-backcolor"] = "Lavender";
         }
+
     }
 
     // This function is called immediately after a set of request headers has
@@ -276,7 +277,6 @@ class Handlers
     }
 
 	static function OnDone(oSession: Session) {
-		return;
 		var httpResponseCode = oSession.oResponse.headers.HTTPResponseCode;
 		var localPath = gs_localPath;
 		var currentDate = new Date();
@@ -287,17 +287,29 @@ class Handlers
 		var currentSecond = (currentDate.getSeconds()<10?"0":"") + currentDate.getSeconds()
 		var currentTime = currentDate.getYear() + currentMonth + currentDay + currentHour + currentMinute + currentSecond
 		
-		if (oSession.isHTTPS && oSession.host.Contains("wx2.qq.com") && (httpResponseCode==200)) {
-			var fileName = "" 
-			if (oSession.PathAndQuery.Contains("webwxgetmsgimg")) {
-				var msgId = oSession.PathAndQuery.replace(/.*?MsgID=([^&]+)&.*/, "$1")
-				fileName = localPath + "/" + currentTime + "/" + msgId + ".jpeg";	 			
+		if (oSession.isHTTPS && oSession.host.Contains("wx2.qq.com") && (httpResponseCode==200) && !oSession.url.Contains("synccheck?")) {
+			var fileName = "";
+			
+			//if (oSession.PathAndQuery.Contains("webwxgetmsgimg")) {
+           // 	var msgId = oSession.PathAndQuery.replace(/.*?MsgID=([^&]+)&.*/, "$1")
+				//fileName = localPath + "/" + currentTime + "/" + msgId;	 			
+		  //} else {
+
+			//}	
+
+			fileName = oSession.PathAndQuery.split("?")[0];
+			var pathPieces = fileName.split("/");  
+			fileName = localPath + "/" + currentTime + "/" + oSession.id +  "_" + pathPieces[pathPieces.length-1];				
+			
+			oSession.SaveRequest(fileName + "_request.txt",true)
+			
+			oSession.SaveRequestBody(fileName + "_requestbody.txt")
+			
+			if (oSession.oResponse.MIMEType.StartsWith("image")) {
+				oSession.SaveResponseBody(fileName + "_response.jpeg");
 			} else {
-				fileName = oSession.PathAndQuery.split("?")[0];
-				var pathPieces = fileName.split("/");  
-				fileName = localPath + "/" + currentTime + "/" + pathPieces[pathPieces.length-1] + ".txt";				
-			}	
-			oSession.SaveResponseBody(fileName);
+				oSession.SaveResponseBody(fileName + "_response.txt");
+			}				
 		}	
 	}		
 /*
@@ -545,6 +557,7 @@ class Handlers
 			oSession         = oSessions[x];
 			httpResponseCode = oSession.oResponse.headers.HTTPResponseCode;
 			MessageBox.Show("1")
+			MessageBox.Show(oSession.PathAndQuery)
 			
 			if ((oSession.host.Contains("wx2.qq.com")) && (httpResponseCode==200)) {
 				var fileName = "" 
@@ -587,6 +600,7 @@ class Handlers
 		}
 	}			
 }
+
 
 
 
